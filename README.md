@@ -1,2 +1,2 @@
-# rust_examples
-Colection of rust basic examples from https://gobyexample.com/
+# golang_examples
+Colection of golang basic examples from https://gobyexample.com/
