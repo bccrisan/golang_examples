@@ -460,6 +460,93 @@ func multiple_return(){
 }
 
 
+// Here's a function that will take an arbitrary number
+// of `int`s as arguments.
+func sum(nums ...int) {
+    fmt.Print(nums, " ")
+    total := 0
+    for _, num := range nums {
+        total += num
+    }
+    fmt.Println(total)
+}
+
+
+func variadic_function(){
+    // [_Variadic functions_](http://en.wikipedia.org/wiki/Variadic_function)
+    // can be called with any number of trailing arguments.
+    // For example, `fmt.Println` is a common variadic
+    // function.
+    // Variadic functions can be called in the usual way
+    // with individual arguments.
+    sum(1, 2)
+    sum(1, 2, 3)
+
+    // If you already have multiple args in a slice,
+    // apply them to a variadic function using
+    // `func(slice...)` like this.
+    nums := []int{1, 2, 3, 4}
+    sum(nums...)
+}
+
+
+// This function `intSeq` returns another function, which
+// we define anonymously in the body of `intSeq`. The
+// returned function _closes over_ the variable `i` to
+// form a closure.
+func intSeq() func() int {
+    i := 0
+    return func() int {
+        i++
+        return i
+    }
+}
+
+
+
+func closures(){
+    // Go supports [_anonymous functions_](http://en.wikipedia.org/wiki/Anonymous_function),
+    // which can form <a href="http://en.wikipedia.org/wiki/Closure_(computer_science)"><em>closures</em></a>.
+    // Anonymous functions are useful when you want to define
+    // a function inline without having to name it.
+    // We call `intSeq`, assigning the result (a function)
+    // to `nextInt`. This function value captures its
+    // own `i` value, which will be updated each time
+    // we call `nextInt`.
+    nextInt := intSeq()
+
+    // See the effect of the closure by calling `nextInt`
+    // a few times.
+    fmt.Println(nextInt())
+    fmt.Println(nextInt())
+    fmt.Println(nextInt())
+
+    // To confirm that the state is unique to that
+    // particular function, create and test a new one.
+    newInts := intSeq()
+    fmt.Println(newInts())
+}
+
+
+// This `fact` function calls itself until it reaches the
+// base case of `fact(0)`.
+func fact(n int) int {
+    if n == 0 {
+        return 1
+    }
+    return n * fact(n-1)
+}
+
+
+func testing_recursion(){
+// Go supports
+// <a href="http://en.wikipedia.org/wiki/Recursion_(computer_science)"><em>recursive functions</em></a>.
+// Here's a classic factorial example.
+
+    fmt.Println(fact(65))
+
+}
+
 func main() {
 //    hello_world()
 //    separate_functions()
@@ -475,5 +562,10 @@ func main() {
 //    play_with_range()
 //    functions_test()
 //    multiple_return()
+//    variadic_function()
+//    closures()
+//    testing_recursion()
+
+
 
 }
