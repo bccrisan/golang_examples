@@ -2,7 +2,6 @@
 counter=0
 
 FILE=hello.go
-
 OLDTIME=2
 
 
@@ -19,12 +18,12 @@ do
 
     if [ $TIMEDIFF -lt $OLDTIME ]; then
         ((counter++))
-	    echo "Running \"hello.sh\" & Building \"hello.go\": Livebuild #"$counter
+	    echo "Running \"hello.sh\" & Building" $FILE: Livebuild \#$counter
         go build
         echo "-------------Running #"$counter"--------------"
         ./hello
         echo "-------------Ended  #"$counter"---------------"
-        sleep 5
+        sleep 15
     else
         clear
         echo "Nothing to do.."

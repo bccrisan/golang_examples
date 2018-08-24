@@ -547,6 +547,84 @@ func testing_recursion(){
 
 }
 
+
+func zeroval(ival int) {
+    ival = 0
+}
+
+
+func zeroptr(iptr *int) {
+    *iptr = 0
+}
+
+
+func testing_pointers(){
+// Go supports <em><a href="http://en.wikipedia.org/wiki/Pointer_(computer_programming)">pointers</a></em>,
+// allowing you to pass references to values and records
+// within your program.
+// We'll show how pointers work in contrast to values with
+// 2 functions: `zeroval` and `zeroptr`. `zeroval` has an
+// `int` parameter, so arguments will be passed to it by
+// value. `zeroval` will get a copy of `ival` distinct
+// from the one in the calling function.
+
+
+// We'll show how pointers work in contrast to values with
+// 2 functions: `zeroval` and `zeroptr`. `zeroval` has an
+// `int` parameter, so arguments will be passed to it by
+// value. `zeroval` will get a copy of `ival` distinct
+// from the one in the calling function.
+
+
+    i := 1
+    fmt.Println("initial:", i)
+
+    zeroval(i)
+    fmt.Println("zeroval:", i)
+
+    // The `&i` syntax gives the memory address of `i`,
+    // i.e. a pointer to `i`.
+    zeroptr(&i)
+    fmt.Println("zeroptr:", i)
+
+    // Pointers can be printed too.
+    fmt.Println("pointer:", &i)
+}
+
+
+type person struct{
+    name string
+    age int
+}
+
+
+func struct_example(){
+    //This syntax creates a new structure that has for name "Bogdan" and for age, "24"
+    fmt.Println(person{"Bogdan", 24})
+    
+    //The name of the fields can be named while initializing a structure
+    fmt.Println(person{name: "Radu", age: 21})
+    
+    // Omitted fields will be zero-valued.
+    fmt.Println(person{name: "Andreea"})
+
+    // An `&` prefix yields a pointer to the struct.
+    fmt.Println(&person{name: "Ann", age: 40})
+
+    // Access struct fields with a dot.
+    s := person{name: "Sean", age: 50}
+    fmt.Println(s.name)
+
+    // You can also use dots with struct pointers - the
+    // pointers are automatically dereferenced.
+    sp := &s
+    fmt.Println(sp.age)
+
+    // Structs are mutable.
+    sp.age = 51
+    fmt.Println(sp.age)
+}
+
 func main() {
 //    hello_world()
 //    separate_functions()
@@ -565,7 +643,7 @@ func main() {
 //    variadic_function()
 //    closures()
 //    testing_recursion()
-
-
-
+//    testing_pointers()
+    struct_example()
+    struct_example()
 }
